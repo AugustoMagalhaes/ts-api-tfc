@@ -34,9 +34,9 @@ UserModel.init({
     allowNull: false,
   },
 }, {
-  underscored: true,
+  underscored: false,
   sequelize: db,
-  modelName: 'UserModel',
+  modelName: 'users',
   timestamps: false,
 });
 
