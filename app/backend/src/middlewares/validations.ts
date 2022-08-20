@@ -1,12 +1,8 @@
-import { NextFunction, Request, Response } from 'express';
-
 class Validations {
-  public static loginValidation = (req: Request, res:Response, next: NextFunction) => {
-    const { email, password } = req.body;
+  public static loginValidation = async (email: string, password: string) => {
     if (!email || !password) {
-      return res.status(400).json({ message: 'All fields must be filled' });
+      return 'All fields must be filled';
     }
-    next();
   };
 }
 
