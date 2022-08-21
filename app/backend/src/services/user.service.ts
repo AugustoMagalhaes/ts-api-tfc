@@ -1,6 +1,8 @@
 import UserModel from '../database/models/user.model';
 import ILoginUser from '../interfaces/loginUser.interface';
+import IUser from '../interfaces/user.interface';
 import DecryptHandler from '../middlewares/decrypt.handler';
+import TokenHandler from '../middlewares/token.handler';
 
 class UserService {
   public static async getUserByEmail(email: string)
@@ -19,6 +21,11 @@ class UserService {
     const comparison = await DecryptHandler.decrypt(password, user.password);
     if (comparison) return true;
     return false;
+  }
+
+  public static async validate(token: string): Promise<IUser> {
+    const user = await TokenHandler.decodeToken(token) as IUser;
+    return user;
   }
 }
 
