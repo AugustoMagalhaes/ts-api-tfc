@@ -10,6 +10,7 @@ class UserService {
     const user = await UserModel.findOne({
       where: { email },
     });
+
     return user as ILoginUser;
   }
 

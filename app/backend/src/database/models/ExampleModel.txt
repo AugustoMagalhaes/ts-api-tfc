@@ -1,20 +1,20 @@
-import { Model } from 'sequelize';
+// import { Model } from 'sequelize';
 import db from '.';
 // import OtherModel from './OtherModel';
 
-class Example extends Model {
+// class Example extends Model {
   // public <campo>!: <tipo>;
-}
+//}
 
-Example.init({
+//Example.init({
   // ... Campos
-}, {
+//}, {
   // ... Outras configs
-  underscored: true,
-  sequelize: db,
+ // underscored: true,
+ // sequelize: db,
   // modelName: 'example',
-  timestamps: false,
-});
+ // timestamps: false,
+//});
 
 /**
   * `Workaround` para aplicar as associations em TS:
