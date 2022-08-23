@@ -70,6 +70,8 @@ describe('Retorna mensagem de erro quando falta email ou password', () => {
   });
 });
 
+
+
 describe('Retorna mensagem de erro quando usuario não está cadastrado', async () => {
   let chaiHttpResponse: Response;
 
@@ -92,4 +94,4 @@ describe('Retorna mensagem de erro quando usuario não está cadastrado', async 
     expect(chaiHttpResponse).to.have.status(401);
     expect(chaiHttpResponse.body).to.have.property('message', 'Incorrect email or password');
   })
-})
+});
