@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import TeamService from '../services/team.service';
 
 class TeamController {
-  public static async getAllTeams(req: Request, res: Response) {
+  public static async getAllTeams(_req: Request, res: Response) {
     try {
       const teams = await TeamService.getAllTeams();
       return res.status(200).json(teams);
