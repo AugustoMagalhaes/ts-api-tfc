@@ -7,7 +7,7 @@ import { app } from '../app';
 import { userAdminEmail } from './mocks/user.model.mock';
 
 import { Response } from 'superagent';
-import IUser from '../interfaces/user.interface';
+import UserModel from '../database/models/user.model';
 import TokenHandler from '../middlewares/token.handler';
 
 chai.use(chaiHttp);
@@ -24,12 +24,12 @@ describe('Rota login/validate', () => {
     };
 
     before(async () => {
-      sinon.stub(TokenHandler, 'decodeToken').resolves(userAdminEmail as IUser);
+      sinon.stub(UserModel, 'findOne').resolves(userAdminEmail as UserModel);
       chaiHttpResponse = await chai.request(app).get('/login/validate').set(headers);
     });
 
     after(() => {
-      (TokenHandler.decodeToken as sinon.SinonStub).restore();
+      (UserModel.findOne as sinon.SinonStub).restore();
     });
 
     it('retorna status 200 e "role" correta', async () => {
