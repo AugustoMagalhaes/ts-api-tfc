@@ -5,7 +5,7 @@ import IMatch from '../interfaces/match.interface';
 class MatchService {
   public static async getAllMatches()
   : Promise<IMatch[]> {
-    const teams = await MatchModel.findAll({
+    const matches = await MatchModel.findAll({
       include: [{
         model: TeamModel,
         as: 'teamHome',
@@ -17,7 +17,7 @@ class MatchService {
       }],
     });
 
-    return teams as IMatch[];
+    return matches as IMatch[];
   }
 }
 
