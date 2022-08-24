@@ -8,6 +8,11 @@ class TeamService {
 
     return teams as ITeam[];
   }
+
+  public static async getTeamById(id: number): Promise<ITeam> {
+    const team = await TeamModel.findOne({ where: { id } });
+    return team as ITeam;
+  }
 }
 
 export default TeamService;
