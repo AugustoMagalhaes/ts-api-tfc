@@ -1,4 +1,4 @@
-const allTeams = [
+export const allTeams = [
   {
     "id": 1,
     "teamName": "Avaí/Kindermann"
@@ -65,7 +65,7 @@ const allTeams = [
   }
 ]
 
-const ferroviariaTeam = {
+export const ferroviariaTeam = {
   "id": 6,
   "teamName": "Ferroviária"
 }
