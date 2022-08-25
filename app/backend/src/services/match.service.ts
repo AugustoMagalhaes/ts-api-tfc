@@ -1,6 +1,8 @@
 import MatchModel from '../database/models/match.model';
 import TeamModel from '../database/models/team.model';
 import IMatch from '../interfaces/match.interface';
+import IUser from '../interfaces/user.interface';
+import TokenHandler from '../middlewares/token.handler';
 
 class MatchService {
   public static async getAllMatches()
@@ -18,6 +20,29 @@ class MatchService {
     });
 
     return matches as IMatch[];
+  }
+
+  public static async validate(token: string): Promise<boolean> {
+    const user = await TokenHandler.decodeToken(token) as IUser;
+    return !!user;
+  }
+
+  public static async createMatch(
+    homeTeam: number,
+    homeTeamGoals: number,
+    awayTeam: number,
+    awayTeamGoals: number,
+  ) {
+    const newMatch = await MatchModel.create({ homeTeam,
+      homeTeamGoals,
+      awayTeam,
+      awayTeamGoals,
+      inProgress: 1 });
+
+    if (!newMatch) return null;
+
+    const { id, inProgress } = newMatch;
+    return { id, homeTeam, homeTeamGoals, awayTeam, awayTeamGoals, inProgress };
   }
 }
 
