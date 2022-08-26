@@ -56,6 +56,10 @@ class MatchService {
     await match.save();
     return match;
   }
+
+  public static async checkRepeatedTeam(homeTeam: number, awayTeam: number) {
+    return homeTeam === awayTeam;
+  }
 }
 
 export default MatchService;
