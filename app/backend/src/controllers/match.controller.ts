@@ -17,6 +17,10 @@ class MatchController {
       const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
       const { authorization: token } = req.headers;
 
+      const hasTeams = await MatchService.checkTeamsInDb(homeTeam, awayTeam);
+
+      if (!hasTeams) return res.status(404).json({ message: 'There is no team with such id!' });
+
       const validation = await MatchService.validate(token as string);
       if (!validation) throw new Error('Invalid token');
 
@@ -31,7 +35,6 @@ class MatchController {
 
       return res.status(201).json(newMatch);
     } catch (err) {
-      console.log(err);
       return err instanceof Error && res.status(500).json({ message: err.message });
     }
   }
