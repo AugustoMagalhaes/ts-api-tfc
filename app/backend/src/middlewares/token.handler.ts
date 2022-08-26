@@ -18,15 +18,19 @@ export default class TokenHandler {
 
   public static async decodeToken(token: string): Promise<IUser | boolean> {
     const secret = process.env.JWT_SECRET as string;
-    const decoded = Jwt.verify(token, secret) as Jwt.JwtPayload;
+    try {
+      const decoded = Jwt.verify(token, secret) as Jwt.JwtPayload;
 
-    const { email } = decoded.data;
+      const { email } = decoded.data;
 
-    const user = await UserModel.findOne({
-      where: { email },
-    });
+      const user = await UserModel.findOne({
+        where: { email },
+      });
 
-    if (!user) return false;
-    return user;
+      return user as IUser;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
   }
 }
