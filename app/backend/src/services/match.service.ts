@@ -1,6 +1,7 @@
 import MatchModel from '../database/models/match.model';
 import TeamModel from '../database/models/team.model';
 import IMatch from '../interfaces/match.interface';
+import ITeam from '../interfaces/team.interface';
 import IUser from '../interfaces/user.interface';
 import TokenHandler from '../middlewares/token.handler';
 
@@ -59,6 +60,15 @@ class MatchService {
 
   public static async checkRepeatedTeam(homeTeam: number, awayTeam: number) {
     return homeTeam === awayTeam;
+  }
+
+  public static async checkTeamsInDb(homeTeam: number, awayTeam: number) {
+    const allTeams = await TeamModel.findAll();
+
+    const allIds = allTeams.map((el: ITeam) => el.id);
+    const hasIds = allIds.includes(homeTeam) && allIds.includes(awayTeam);
+
+    return hasIds;
   }
 }
 
