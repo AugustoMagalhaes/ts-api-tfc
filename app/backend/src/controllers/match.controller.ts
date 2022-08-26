@@ -18,8 +18,13 @@ class MatchController {
       const { authorization: token } = req.headers;
 
       const validation = await MatchService.validate(token as string);
-
       if (!validation) throw new Error('Invalid token');
+
+      const hasMatch = await MatchService.checkRepeatedTeam(homeTeam, awayTeam);
+      if (hasMatch) {
+        return res.status(401)
+          .json({ message: 'It is not possible to create a match with two equal teams' });
+      }
 
       const newMatch = await MatchService
         .createMatch(homeTeam, homeTeamGoals, awayTeam, awayTeamGoals);
