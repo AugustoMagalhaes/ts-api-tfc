@@ -13,16 +13,15 @@ class MatchController {
   }
 
   public static async createMatch(req: Request, res: Response) {
-    try {
-      const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
-      const { authorization: token } = req.headers;
+    const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
+    const { authorization: token } = req.headers;
 
+    try {
+      const validation = await MatchService.validate(token as string);
+      if (!validation) return res.status(401).json({ message: 'Token must be a valid token' });
       const hasTeams = await MatchService.checkTeamsInDb(homeTeam, awayTeam);
 
       if (!hasTeams) return res.status(404).json({ message: 'There is no team with such id!' });
-
-      const validation = await MatchService.validate(token as string);
-      if (!validation) throw new Error('Invalid token');
 
       const hasMatch = await MatchService.checkRepeatedTeam(homeTeam, awayTeam);
       if (hasMatch) {
@@ -35,7 +34,7 @@ class MatchController {
 
       return res.status(201).json(newMatch);
     } catch (err) {
-      return err instanceof Error && res.status(500).json({ message: err.message });
+      return err instanceof Error && res.status(401).json({ message: err.message });
     }
   }
 
