@@ -30,6 +30,19 @@ class MatchController {
       return err instanceof Error && res.status(500).json({ message: err.message });
     }
   }
+
+  public static async finishMatch(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const numId = Number(id);
+      const updateMatch = await MatchService.finishMatch(numId);
+      if (!updateMatch) throw new Error('Cannot update missing id');
+
+      return res.status(200).json({ message: 'Finished' });
+    } catch (err) {
+      return err instanceof Error && res.status(500).json({ message: err.message });
+    }
+  }
 }
 
 export default MatchController;
