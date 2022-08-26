@@ -44,6 +44,18 @@ class MatchService {
     const { id, inProgress } = newMatch;
     return { id, homeTeam, homeTeamGoals, awayTeam, awayTeamGoals, inProgress };
   }
+
+  public static async finishMatch(id: number) {
+    const match = await MatchModel.findOne({ where: { id } });
+    if (!match) return null;
+
+    match.set({
+      inProgress: false,
+    });
+
+    await match.save();
+    return match;
+  }
 }
 
 export default MatchService;
