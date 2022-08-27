@@ -3,7 +3,7 @@ import MatchController from '../controllers/match.controller';
 
 const router = Router();
 
-router.get('/', MatchController.getAllTeams);
+router.get('/', MatchController.getAllMatches);
 router.post('/', MatchController.createMatch);
 router.patch('/:id/finish', MatchController.finishMatch);
 
