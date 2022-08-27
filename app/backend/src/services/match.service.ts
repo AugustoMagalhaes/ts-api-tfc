@@ -70,6 +70,20 @@ class MatchService {
 
     return hasIds;
   }
+
+  public static async changeMatchScore(id: number, homeTeamGoals: number, awayTeamGoals: number) {
+    const match = await MatchModel.findOne({ where: { id } });
+
+    if (!match) return null;
+
+    match.set({
+      homeTeamGoals,
+      awayTeamGoals,
+    });
+
+    await match.save();
+    return match;
+  }
 }
 
 export default MatchService;
