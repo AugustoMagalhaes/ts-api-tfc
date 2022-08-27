@@ -42,3 +42,30 @@ export const matchMock = [
     },
   },
 ];
+
+export const matchModelCreate = {
+  id: 49,
+  homeTeam: 1,
+  homeTeamGoals: 2,
+  awayTeam: 12,
+  awayTeamGoals: 2,
+  inProgress: true,
+};
+
+export const matchPostMock = {
+  id: 49,
+  homeTeam: 1,
+  homeTeamGoals: 2,
+  awayTeam: 12,
+  awayTeamGoals: 2,
+  inProgress: true,
+};
+
+export const matchPatchMock = {
+    id: 2,
+    homeTeam: 9,
+    homeTeamGoals: 1,
+    awayTeam: 14,
+    awayTeamGoals: 1,
+    inProgress: false
+  };
