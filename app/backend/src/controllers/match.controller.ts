@@ -50,6 +50,23 @@ class MatchController {
       return err instanceof Error && res.status(500).json({ message: err.message });
     }
   }
+
+  public static async changeMatchScore(req: Request, res: Response) {
+    try {
+      const { homeTeamGoals, awayTeamGoals } = req.body;
+      const { id } = req.params;
+      const numId = Number(id);
+
+      const updateMatchGoals = await MatchService
+        .changeMatchScore(numId, homeTeamGoals, awayTeamGoals);
+
+      if (!updateMatchGoals) throw new Error('Cannot find match id');
+
+      return res.status(200).json({ homeTeamGoals, awayTeamGoals });
+    } catch (err) {
+      return err instanceof Error && res.status(500).json({ message: err.message });
+    }
+  }
 }
 
 export default MatchController;
