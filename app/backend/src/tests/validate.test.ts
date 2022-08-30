@@ -20,7 +20,7 @@ describe('Rota login/validate', () => {
   describe('com token correto', () => {
     const headers = {
       authorization:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjYxMDI1NDA3LCJleHAiOjE2NjE2MzAyMDd9.ShVUIS0cjq089M3r74dfsWCjhylQf0Ln3zsvMTYM_uk',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicGFzc3dvcmQiOiJzZWNyZXRfYWRtaW4ifSwiaWF0IjoxNjYxODcxMTg4LCJleHAiOjE2NjI0NzU5ODh9.L1BIknXDyrxcpU8kowJ8sGYR7iYNM0r2UJeMg9uwQFY',
     };
 
     before(async () => {
