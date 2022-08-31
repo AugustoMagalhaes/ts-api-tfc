@@ -84,6 +84,30 @@ class MatchService {
     await match.save();
     return match;
   }
+
+  public static async getFinishedMatches() {
+    const finishedMatches = await MatchModel.findAll({
+      where: { inProgress: false },
+      include: [{
+        model: TeamModel,
+        as: 'teamHome',
+        attributes: ['teamName'],
+      },
+      { model: TeamModel,
+        as: 'teamAway',
+        attributes: ['teamName'],
+      }],
+      attributes: { exclude: ['inProgress'] },
+    });
+    return finishedMatches;
+  }
+
+  public static async getFinishedMatchesByHomeTeam(homeTeamId: number) {
+    const allFinishedMatches = await MatchService.getFinishedMatches();
+    const homeTeamFinishedMatches = allFinishedMatches
+      .filter((match) => match.homeTeam === homeTeamId);
+    return homeTeamFinishedMatches;
+  }
 }
 
 export default MatchService;
